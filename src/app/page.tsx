@@ -1,5 +1,5 @@
-import Logo from "@/components/Logo";
-import AuthButton from "@/components/AuthButton";
+import Logo from "@/components/home/Logo";
+import AuthButton from "@/components/home/AuthButton";
 const Home = () => {
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 text-gray-800">
@@ -15,7 +15,7 @@ const Home = () => {
           <AuthButton
             name="Register"
             styles="registre"
-            type="registre"
+            type="register"
           />
         </div>
       </header>
