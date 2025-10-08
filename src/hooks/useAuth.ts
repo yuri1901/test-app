@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { auth } from "../firebase/firebaseConfig";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged, signOut, type User } from "firebase/auth";
+import { redirect, useRouter } from "next/navigation";
 
 export interface FormData {
   name: string;
@@ -25,6 +26,8 @@ const useAuth = (isLogin: boolean) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
+  const router = useRouter();
+  console.log(token);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -106,11 +109,10 @@ const useAuth = (isLogin: boolean) => {
       }
 
       const user = userCredential.user;
-      // Отримуємо токен і зберігаємо його в стані
       const idToken = await user.getIdToken();
-      setToken(idToken); // Зберігаємо токен в стані
-      localStorage.setItem("authToken", idToken); // Також зберігаємо в localStorage
-
+      setToken(idToken);
+      localStorage.setItem("authToken", idToken);
+      router.push("/books");
       clearForm();
     } catch (error: any) {
       let message = "Сталася помилка. Спробуйте ще раз.";
