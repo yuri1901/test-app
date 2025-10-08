@@ -1,11 +1,20 @@
 import Logo from "@/components/home/Logo";
 import AuthButton from "@/components/home/AuthButton";
+import Link from "next/link";
 const Home = () => {
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 text-gray-800">
       {/* HEADER */}
       <header className="w-full bg-white shadow-md py-4 px-6 flex items-center justify-between">
-        <Logo />
+        <div className="flex items-center space-x-4">
+          <Logo />
+          <Link
+            href="/books"
+            className="text-blue-600 hover:text-blue-800 font-medium"
+          >
+            Книги
+          </Link>
+        </div>
         <div className="flex space-x-4">
           <AuthButton
             name="Login"
