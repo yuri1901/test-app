@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 interface BookItemProps {
   id: string;
   title: string;
@@ -32,7 +33,9 @@ const BookItem: React.FC<BookItemProps> = ({ id, title, author, imageUrl, onView
 
       <div className="p-4">
         <div className="mb-3">
-          <h3 className="text-lg font-semibold text-gray-900 mb-1 line-clamp-2 hover:text-blue-600 transition-colors">{title}</h3>
+          <Link href={`/books/${id}`}>
+            <h3 className="text-lg font-semibold text-gray-900 mb-1 line-clamp-2 hover:text-blue-600 transition-colors cursor-pointer">{title}</h3>
+          </Link>
           <p className="text-sm text-gray-600 font-medium">
             Автор: <span className="text-gray-800">{author}</span>
           </p>
