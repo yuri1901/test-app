@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/context/ContextAuth";
-
+import Link from "next/link";
 const Account = () => {
   const { currentUser, logout } = useAuthContext();
   const router = useRouter();
@@ -16,7 +16,7 @@ const Account = () => {
   };
   return (
     <div className="flex items-center space-x-4">
-      <span>{currentUser?.displayName}</span>
+      <Link href="/profile">{currentUser?.displayName}</Link>
       <button
         className="bg-red-600 px-4 py-2 rounded text-white hover:bg-red-700"
         onClick={handleLogout}
