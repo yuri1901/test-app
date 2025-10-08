@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { auth } from "../firebase/firebaseConfig";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, onAuthStateChanged, signOut, type User } from "firebase/auth";
 import { redirect, useRouter } from "next/navigation";
+import { sendPasswordResetEmail } from "firebase/auth";
 
 export interface FormData {
   name: string;
@@ -141,6 +142,19 @@ const useAuth = (isLogin: boolean) => {
     localStorage.removeItem("authToken");
   };
 
+  const resetPassword = async (email: string) => {
+    try {
+      await sendPasswordResetEmail(auth, email);
+      alert("Лист для скидання пароля надіслано на вашу електронну пошту.");
+    } catch (error: any) {
+      let message = "Не вдалося скинути пароль. Спробуйте ще раз.";
+      if (error.code === "auth/user-not-found") {
+        message = "Користувача з таким email не знайдено.";
+      }
+      alert(message);
+    }
+  };
+
   return {
     formData,
     errors,
@@ -150,6 +164,7 @@ const useAuth = (isLogin: boolean) => {
     handleSubmit,
     clearForm,
     logout,
+    resetPassword,
   };
 };
 

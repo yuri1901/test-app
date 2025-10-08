@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import useAuth from "@/hooks/useAuth";
+import PasswordReset from "@/components/PasswordReset";
 
 const AuthPage = () => {
   const searchParams = useSearchParams();
@@ -95,6 +96,12 @@ const AuthPage = () => {
             {isSubmitting ? (isLogin ? "Вхід..." : "Реєстрація...") : isLogin ? "Увійти" : "Зареєструватися"}
           </button>
         </form>
+
+        {isLogin && (
+          <div className="text-center mt-4">
+            <PasswordReset />
+          </div>
+        )}
 
         <div className="text-center mt-6 text-sm text-gray-600">
           {isLogin ? (
